@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx  # Build custom Nginx image
+    container_name: nginx-server
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
